@@ -13,7 +13,7 @@
 
 ## 系統要求
 
-- Python 3.10+
+- Python 3.10
 - 已安裝OpenVoice及其依賴
 - Gemini API Key（用於語音轉文字和翻譯）
 
@@ -25,6 +25,9 @@ source .venv/bin/activate
 ```
 
 2. 所有依賴已安裝完成（見requirements.txt）
+```bash
+pip install -r requirements.txt
+```
 
 ## 使用方法
 
