@@ -21,7 +21,7 @@ reference_speaker = 'test.wav' # This is the voice you want to clone
 target_se, audio_name = se_extractor.get_se(reference_speaker, tone_color_converter, vad=True)
 
 texts = {
-    'EN_NEWEST': "Did you ever hear a folk tale about a giant turtle?",  # The newest English base speaker model
+    #'EN_NEWEST': "Did you ever hear a folk tale about a giant turtle?",  # The newest English base speaker model
     #'ES': "El resplandor del sol acaricia las olas, pintando el cielo con una paleta deslumbrante.",
     #'FR': "La lueur dorée du soleil caresse les vagues, peignant le ciel d'une palette éblouissante.",
     #'ZH': "在这次vacation中，我们计划去Paris欣赏埃菲尔铁塔和卢浮宫的美景。",
