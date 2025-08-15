@@ -1036,6 +1036,17 @@ class RealTimeVoiceTranslationSystem:
             print(f"🔊 {language_name}語音合成完成")
             return output_file.name
             
+        except AttributeError as e:
+            # 處理transformers版本兼容性問題
+            if "'GPT2InferenceModel' object has no attribute 'generate'" in str(e):
+                print("❌ 錯誤：transformers庫版本過高，請降級到4.49.0版本")
+                print("請運行: pip install transformers==4.49.0")
+                if self.gui:
+                    self.gui.root.after(0, lambda: self.gui.update_status("❌ 需要降級transformers版本"))
+                return None
+            else:
+                print(f"❌ 語音合成錯誤: {e}")
+                return None
         except Exception as e:
             error_msg = str(e)
             if any(keyword in error_msg for keyword in ["MeCab", "fugashi", "dictionary format", "GenericTagger"]):

@@ -1,9 +1,10 @@
 sounddevice
 numpy
 TTS==0.22.0
+transformers==4.49.0  # 修復GPT2InferenceModel兼容性問題
 openai-whisper
 google-generativeai
-torch==2.1  # XTTS 與 Whisper 都依賴它
+torch==2.1.1  # XTTS 與 Whisper 都依賴它
 pyaudio
 pygame
 cutlet
@@ -13,4 +14,5 @@ faster-whisper
 whisper-timestamped 
 wavmark
 g2pkk
+bleak
 
