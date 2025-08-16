@@ -990,79 +990,12 @@ class RealTimeVoiceTranslationSystem:
         
         print("🔊 音頻播放線程已停止")
     
-    def synthesize_speech_with_clone(self, text):
-        """使用克隆語音進行XTTS-v2語音合成"""
-        try:
-            if not self.xtts_model:
-                print("❌ XTTS模型未載入")
-                return None
-                
-            if not self.cloned_voice_path or not os.path.exists(self.cloned_voice_path):
-                print("❌ 沒有可用的克隆語音")
-                return None
-            
-            print(f"🎭 使用XTTS-v2克隆語音合成: {text}")
-            
-            # 檢測目標語言
-            language_map = {
-                'zh': 'zh-cn',
-                'en': 'en',
-                'ja': 'ja',
-                'ko': 'ko',
-                'es': 'es',
-                'fr': 'fr',
-                'de': 'de',
-                'it': 'it',
-                'pt': 'pt'
-            }
-            
-            target_language = language_map.get(self.target_language, 'en')
-            print(f"🌍 目標語言: {target_language}")
-            
-            # 使用XTTS-v2進行語音合成
-            outputs = self.xtts_model.synthesize(
-                text,
-                self.config,
-                speaker_wav=self.cloned_voice_path,
-                gpt_cond_len=3,
-                language=target_language,
-            )
-            
-            # 保存合成的音頻
-            output_file = f"output_speech_{int(time.time())}.wav"
-            with wave.open(output_file, 'wb') as wav_file:
-                wav_file.setnchannels(1)  # 單聲道
-                wav_file.setsampwidth(2)  # 16位
-                wav_file.setframerate(22050)  # XTTS默認採樣率
-                
-                # 轉換輸出格式
-                audio_np = outputs["wav"]
-                if isinstance(audio_np, np.ndarray):
-                    # 確保音頻在正確範圍內
-                    audio_np = np.clip(audio_np, -1.0, 1.0)
-                    # 轉換為16位整數
-                    audio_int16 = (audio_np * 32767).astype(np.int16)
-                    wav_file.writeframes(audio_int16.tobytes())
-                
-            print(f"✅ XTTS-v2語音合成完成: {output_file}")
-            return output_file
-            
-        except Exception as e:
-            print(f"❌ XTTS-v2語音合成失敗: {e}")
-            import traceback
-            traceback.print_exc()
-            return None
-
     def synthesize_speech(self, text):
-        """使用克隆語音合成語音（舊版本兼容）"""
+        """使用克隆語音合成語音"""
         try:
             if not self.cloned_voice_path or not os.path.exists(self.cloned_voice_path):
                 print("❌ 沒有可用的克隆語音")
                 return None
-            
-            # 優先使用XTTS-v2
-            if self.xtts_model:
-                return self.synthesize_speech_with_clone(text)
             
             # 檢測目標語言
             language_map = {

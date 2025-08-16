@@ -167,7 +167,18 @@ pip install bleak  # BLE支援
 ```bash
 # 啟動電腦端BLE處理程式
 python bluetooth_voice_handler.py
+
+# 或者先測試藍牙掃描功能
+python test_bluetooth_scan.py
 ```
+
+### 步驟 5: 設備選擇
+運行程式後，系統會：
+1. **自動掃描** 所有可用的BLE設備
+2. **顯示設備列表** 並標識ESP32設備
+3. **讓用戶選擇** 要連接的設備
+4. **提供重新掃描** 選項
+5. **自動連接** 選定的ESP32設備
 
 ## 🎯 使用方法
 
