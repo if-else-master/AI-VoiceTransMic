@@ -658,7 +658,7 @@ class RealTimeVoiceTranslationSystem:
         
         # 語音活動檢測
         self.silence_threshold = 500
-        self.silence_duration = 1.0  # 降低到1秒以提高響應速度
+        self.silence_duration = 1  # 降低到1秒以提高響應速度
         self.min_speech_duration = 0.3
         
         # 音頻緩衝
